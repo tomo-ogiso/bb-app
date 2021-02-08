@@ -147,6 +147,12 @@
   display: none;
 }
 
+/* ********** swiper********** */
+.swiper-button-prev,
+.swiper-button-next {
+  color: #206cbd;
+}
+
 @media screen and (min-width: 576px) {
   /*********** Module Spacer ***********/
   .module-spacer--extra-extra-small {
