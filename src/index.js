@@ -6,6 +6,8 @@ import * as History from "history";
 import createStore from "./reducks/store/store";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import { theme } from "./assets/theme";
+import { MuiThemeProvider } from "@material-ui/core/styles";
 
 // History生成
 const history = History.createBrowserHistory();
@@ -15,7 +17,9 @@ export const store = createStore(history);
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
-      <App />
+      <MuiThemeProvider theme={theme}>
+        <App />
+      </MuiThemeProvider>
     </ConnectedRouter>
   </Provider>,
   document.getElementById("root")

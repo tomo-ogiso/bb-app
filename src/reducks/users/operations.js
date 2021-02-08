@@ -107,10 +107,10 @@ export const signUp = (username, email, password, confirmPassword) => {
     }
 
     // username 半角英数字
-    if (username.match(/^[0-9a-zA-Z]*$/)) {
-      alert("ユーザー名は半角英数字で入力してください。");
-      return false;
-    }
+    // if (username.match(/^[0-9a-zA-Z]*$/)) {
+    //   alert("ユーザー名は半角英数字で入力してください。");
+    //   return false;
+    // }
 
     // password 文字数
     if (password.length < 6) {
