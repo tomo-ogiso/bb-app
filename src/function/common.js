@@ -1,3 +1,4 @@
+import HTMLReactParser from "html-react-parser";
 /**
  * バリエーション・メールアドレス
  * @param email
@@ -21,4 +22,16 @@ export const isValidRequiredInput = (...args) => {
     }
   }
   return validator;
+};
+
+/**
+ *HTML<br>へ変換処理
+ * @params text
+ */
+export const convertBr = (text) => {
+  if (text === "") {
+    return text;
+  } else {
+    return HTMLReactParser(text.replace(/\r?\n/g, "<br/>"));
+  }
 };
