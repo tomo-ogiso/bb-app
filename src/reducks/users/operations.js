@@ -1,4 +1,5 @@
 import {
+  fetchOrdersHistoryAction,
   fetchProductsInCartAction,
   signInAction,
   signOutAction,
@@ -9,6 +10,26 @@ import {
   isValidRequiredInput,
 } from "../../function/common";
 import { auth, db, FirebaseTimestamp } from "../../firebase";
+
+export const fetchOrderHistory = () => {
+  return async (dispatch, getState) => {
+    const uid = getState().users.uid;
+    const list = [];
+
+    db.collection("users")
+      .doc(uid)
+      .collection("orders")
+      .orderBy("updated_at", "desc")
+      .get()
+      .then((snapshots) => {
+        snapshots.forEach((snapshot) => {
+          const data = snapshot.data();
+          list.push(data);
+        });
+        dispatch(fetchOrdersHistoryAction(list));
+      });
+  };
+};
 
 export const addProductToCart = (addedProduct) => {
   return async (dispatch, getState) => {
