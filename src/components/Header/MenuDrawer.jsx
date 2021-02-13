@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import Divider from "@material-ui/core/Divider";
 import Drawer from "@material-ui/core/Drawer";
 import List from "@material-ui/core/List";
@@ -16,6 +16,7 @@ import { TextInput } from "../UI";
 import { useDispatch } from "react-redux";
 import { push } from "connected-react-router";
 import { signOut } from "../../reducks/users/operations";
+import { db } from "../../firebase";
 
 const useStyles = makeStyles((theme) => ({
   drawer: {
@@ -38,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
 const MenuDrawer = (props) => {
   const classes = useStyles();
   const { container } = props;
-  const dispatch = useDispatch("");
+  const dispatch = useDispatch();
 
   const [keyword, setKeyword] = useState("");
   const inputKeyword = useCallback(
@@ -52,6 +53,33 @@ const MenuDrawer = (props) => {
     dispatch(push(path));
     props.onClose(event);
   };
+
+  const [filters, setFilters] = useState([
+    {
+      func: selectMenu,
+      label: "すべて",
+      id: "all",
+      value: "/",
+    },
+    {
+      func: selectMenu,
+      label: "メンズ",
+      id: "mens",
+      value: "/?gender=mens",
+    },
+    {
+      func: selectMenu,
+      label: "レディース",
+      id: "female",
+      value: "/?gender=ladies",
+    },
+    {
+      func: selectMenu,
+      label: "キッズ",
+      id: "kids",
+      value: "/?gender=kids",
+    },
+  ]);
 
   const menus = [
     {
@@ -76,6 +104,25 @@ const MenuDrawer = (props) => {
       value: "/user/mypage",
     },
   ];
+
+  useEffect(() => {
+    db.collection("categories")
+      .orderBy("order", "asc")
+      .get()
+      .then((snapshots) => {
+        const list = [];
+        snapshots.forEach((snapshot) => {
+          const category = snapshot.data();
+          list.push({
+            func: selectMenu,
+            label: category.name,
+            id: category.id,
+            value: `/?category=${category.id}`,
+          });
+        });
+        setFilters((prevState) => [...prevState, ...list]);
+      });
+  }, []);
 
   return (
     <nav className={classes.drawer}>
@@ -126,6 +173,18 @@ const MenuDrawer = (props) => {
                 </ListItemIcon>
                 <ListItemText primary="logout" />
               </ListItem>
+            </List>
+            <Divider />
+            <List>
+              {filters.map((filter) => (
+                <ListItem
+                  button
+                  key={filter.id}
+                  onClick={(e) => filter.func(e, filter.value)}
+                >
+                  <ListItemText primary={filter.label} />
+                </ListItem>
+              ))}
             </List>
           </div>
         </div>
