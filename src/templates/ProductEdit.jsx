@@ -16,9 +16,12 @@ const ProductEdit = () => {
   const [name, setName] = useState(""),
     [description, setDescription] = useState(""),
     [maker, setMaker] = useState(""),
+    [makers, setMakers] = useState([]),
     [category, setCategory] = useState(""),
+    [categories, setCategories] = useState([]),
     [gender, setGender] = useState(""),
     [hand, setHand] = useState(""),
+    [handTypes, setHandTypes] = useState([]),
     [images, setImages] = useState(""),
     [price, setPrice] = useState(""),
     [sizes, setSizes] = useState([]);
@@ -44,31 +47,12 @@ const ProductEdit = () => {
     [setPrice]
   );
 
-  // メーカー
-  const makers = [
-    { id: "mizuno", name: "ミズノ" },
-    { id: "ZETT", name: "ZETT" },
-    { id: "SSK", name: "SSK" },
-    { id: "nike", name: "ナイキ" },
-  ];
-
-  // カテゴリー
-  const categories = [
-    { id: "uni", name: "ユニフォーム" },
-    { id: "gloves", name: "グローブ" },
-    { id: "spike", name: "スパイク" },
-  ];
   // 性別
   const genders = [
     { id: "all", name: "全て" },
     { id: "mens", name: "メンズ" },
     { id: "ladies", name: "レディース" },
     { id: "kids", name: "キッズ" },
-  ];
-  // 利き手
-  const handTypes = [
-    { id: "left", name: "左用" },
-    { id: "right", name: "右用" },
   ];
 
   useEffect(() => {
@@ -90,6 +74,57 @@ const ProductEdit = () => {
         });
     }
   }, [id]);
+
+  useEffect(() => {
+    db.collection("categories")
+      .orderBy("order", "asc")
+      .get()
+      .then((snapshots) => {
+        const list = [];
+        snapshots.forEach((snapshot) => {
+          const data = snapshot.data();
+          list.push({
+            id: data.id,
+            name: data.name,
+          });
+        });
+        setCategories(list);
+      });
+  }, []);
+
+  useEffect(() => {
+    db.collection("makers")
+      .orderBy("order", "asc")
+      .get()
+      .then((snapshots) => {
+        const list = [];
+        snapshots.forEach((snapshot) => {
+          const data = snapshot.data();
+          list.push({
+            id: data.id,
+            name: data.name,
+          });
+        });
+        setMakers(list);
+      });
+  }, []);
+
+  useEffect(() => {
+    db.collection("handTypes")
+      .orderBy("order", "asc")
+      .get()
+      .then((snapshots) => {
+        const list = [];
+        snapshots.forEach((snapshot) => {
+          const data = snapshot.data();
+          list.push({
+            id: data.id,
+            name: data.name,
+          });
+        });
+        setHandTypes(list);
+      });
+  }, []);
 
   return (
     <section>
