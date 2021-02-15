@@ -101,7 +101,7 @@ const MenuDrawer = (props) => {
       label: "プロフィール",
       icon: <PersonIcon />,
       id: "profile",
-      value: "/user/mypage",
+      value: "/profile",
     },
   ];
 
