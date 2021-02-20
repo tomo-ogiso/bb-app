@@ -193,6 +193,9 @@
 
 /* ********** footer********** */
 .footer-inner {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
   color: #ffffff;
   padding: 10px 20px;
   background-color: slategrey;

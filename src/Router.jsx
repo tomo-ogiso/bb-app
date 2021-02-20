@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Switch } from "react-router";
 import {
+  CheckoutWrapper,
   Profile,
   OrderHistory,
   OrderConfirm,
@@ -28,6 +29,7 @@ const Router = () => {
         <Route exact path={"/cart"} component={CartList} />
         <Route exact path={"/order/confirm"} component={OrderConfirm} />
         <Route exact path={"/order/history"} component={OrderHistory} />
+        <Route exact path={"/user/payment/edit"} component={CheckoutWrapper} />
       </Auth>
     </Switch>
   );
