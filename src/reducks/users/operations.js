@@ -59,6 +59,7 @@ export const listenAuthState = () => {
             const data = snapshot.data();
             dispatch(
               signInAction({
+                email: data.email,
                 isSignedIn: true,
                 role: data.role,
                 uid: uid,
@@ -121,6 +122,7 @@ export const signIn = (email, password) => {
             const data = snapshot.data();
             dispatch(
               signInAction({
+                email: data.email,
                 isSignedIn: true,
                 role: data.role,
                 uid: uid,
@@ -146,12 +148,6 @@ export const signUp = (username, email, password, confirmPassword) => {
       alert("メールアドレスの形式が不正です。もう1度お試しください。");
       return false;
     }
-
-    // username 半角英数字
-    // if (username.match(/^[0-9a-zA-Z]*$/)) {
-    //   alert("ユーザー名は半角英数字で入力してください。");
-    //   return false;
-    // }
 
     // password 文字数
     if (password.length < 6) {

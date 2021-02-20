@@ -41,14 +41,6 @@ const MenuDrawer = (props) => {
   const { container } = props;
   const dispatch = useDispatch();
 
-  const [keyword, setKeyword] = useState("");
-  const inputKeyword = useCallback(
-    (event) => {
-      setKeyword(event.target.value);
-    },
-    [setKeyword]
-  );
-
   const selectMenu = (event, path) => {
     dispatch(push(path));
     props.onClose(event);
@@ -140,21 +132,6 @@ const MenuDrawer = (props) => {
           onKeyDown={(e) => props.onClose(e)}
         >
           <div>
-            <div className={classes.searchField}>
-              <TextInput
-                fullWidth={false}
-                label={"キーワードを入力"}
-                multiline={false}
-                onChange={setKeyword}
-                required={false}
-                rows={1}
-                value={keyword}
-                type={"text"}
-              />
-              <IconButton>
-                <SearchIcon />
-              </IconButton>
-            </div>
             <Divider />
             <List>
               {menus.map((menu) => (

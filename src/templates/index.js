@@ -8,3 +8,4 @@ export { default as CartList } from "./CartList";
 export { default as OrderConfirm } from "./OrderConfirm";
 export { default as OrderHistory } from "./OrderHistory";
 export { default as Profile } from "./Profile";
+export { default as CheckoutWrapper } from "./CheckoutWrapper";
