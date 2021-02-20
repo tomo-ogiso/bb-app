@@ -15,9 +15,9 @@ function
 
 Technology
 -------------------------
-【マークアップ言語/ライブラリ】HTML5,CSS/Material-UI
-【開発言語/ライブラリ】JavaScript/React
-【FW】Redux
-【DB】Firebase(Authentication,Firestore,Functions,Storage)
-【その他】決済サービス(Stripe)
+【マークアップ言語/ライブラリ】HTML5,CSS/Material-UI  
+【開発言語/ライブラリ】JavaScript/React  
+【FW】Redux  
+【DB】Firebase(Authentication,Firestore,Functions,Storage)  
+【その他】決済サービス(Stripe)  
 
