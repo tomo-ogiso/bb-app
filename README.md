@@ -1,4 +1,4 @@
-#baseball ECアプリ
+*baseball ECアプリ*
 
 React/Redux - Firebaseを使ったECアプリケーションを開発
 
